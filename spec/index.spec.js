@@ -113,14 +113,24 @@ describe('api', () => {
             const comment = 'This comment is to test the api';
             return request(app)
             .post(`/api/articles/${article_id}/comments`)
-            .send({
-                comment
-            })
+            .send({comment})
             .expect(201)
             .then(res => {
                 const comment_test = res.body.comment.body;
                 expect(comment_test).to.equal(comment);
             });
           });
-      });
+          it('returns a 400 error if the body of the comment is an empty string or a string of whitespaces', () => {
+            const article_id = updatedData.articles[0]._id;
+            const comment = '                    ';
+            return request(app)
+              .post(`/api/articles/${article_id}/comments`)
+              .send({comment})
+              .expect(400)
+              .then(res => {
+                const error = res.body.message;
+                expect(error).to.equal('comment not valid - provide comment body');
+            });
+        });
+    });
 });

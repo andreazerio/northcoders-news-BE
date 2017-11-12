@@ -48,11 +48,10 @@ const getCommentsByArticleId = (req, res, next) => {
 const addComment = (req, res, next) => {
 const postBody = req.body.comment;
 const article_id = req.params.article_id;
-const {created_by = 'northcoder'} = req.body;
+if (/^\s*$/g.test(postBody)) return next({status: 400, message: 'comment not valid - provide comment body'});
 const comment = new Comments({
     body: postBody,
-    belongs_to: article_id,
-    created_by
+    belongs_to: article_id
 })
 .save()
 .then(comment => {
