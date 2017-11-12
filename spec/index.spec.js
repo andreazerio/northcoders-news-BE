@@ -45,11 +45,21 @@ describe('api', () => {
           return request(app)
             .get(`/api/topics/${topic}/articles`)
             .expect(200)
-            .then(({body}) => {
-              const {articles} = body;
+            .then(res => {
+              const articles = res.body.articles;
               expect(articles).to.be.an('array');
               expect(articles[0].belongs_to).to.equal(topic);
+              expect(articles[0].title).to.equal('Cats are great')
             });
         });
+        it('returns a 404 error status code if parameter is not a valid topic', () => {
+            return request(app)
+              .get('/api/topics/andrea/articles')
+              .expect(404)
+              .then(res => {
+                const error = res.body.message;
+                expect(error).to.equal('topic not found');
+              });
+          });
       });
 });
