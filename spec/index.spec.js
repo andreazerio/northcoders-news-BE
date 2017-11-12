@@ -40,7 +40,7 @@ describe('api', () => {
         });
       });
       describe('GET api/topics/:topic_id/articles', () => {
-        it('returns an array of topics with a status code of 200', () => {
+        it('returns an array of topics with a status code of 200', () => { 
           const topic = updatedData.topics[2].slug;
           return request(app)
             .get(`/api/topics/${topic}/articles`)
@@ -62,17 +62,31 @@ describe('api', () => {
               });
           });
       });
-});
-describe('GET api/articles', () => {
-    it('returns an array of articles with a status code of 200', () => {
-        return request(app)
-        .get('/api/articles')
-        .expect(200)
-        .then(res => {
-          expect(res.body.articles).to.be.an('array');
-          expect(res.body.articles.length).to.equal(2);
-          expect(res.body.articles[1].title).to.equal('Football is fun')
-          expect(res.body.articles[0].belongs_to).to.be.a('string');
-        });
-    });
+      describe('GET api/articles', () => {
+          it('returns an array of articles with a status code of 200', () => {
+              return request(app)
+              .get('/api/articles')
+              .expect(200)
+              .then(res => {
+                expect(res.body.articles).to.be.an('array');
+                expect(res.body.articles.length).to.equal(2);
+                expect(res.body.articles[1].title).to.equal('Football is fun')
+                expect(res.body.articles[0].belongs_to).to.be.a('string');
+              });
+          });
+      });
+      describe('GET /api/articles/:article_id/comments', () => {
+          it('returns an array of comments with a status code of 200', () => {
+            const article_id = updatedData.articles[0]._id;
+            return request(app)
+              .get(`/api/articles/${article_id}/comments`)
+              .expect(200)
+              .then((res) => {
+                const comments = res.body.comments;
+                expect(comments).to.be.an('array');
+                expect(comments[0].belongs_to).to.equal(article_id.toString());
+                expect(comments[0].created_by).to.equal('northcoder')
+              });
+          });
+      });
 });

@@ -1,4 +1,4 @@
-const {Topics, Articles} = require('../models/models.js');
+const {Topics, Articles, Comments} = require('../models/models.js');
 
 const getTopics = (req, res, next) => {
     Topics.find()
@@ -32,4 +32,12 @@ const getArticles = (req, res, next) => {
     });
 };
 
-module.exports = {getTopics, getArticlesByTopic, getArticles}
+const getCommentsByArticleId = (req, res, next) => {
+    const article_id = req.params.article_id;
+    Comments.find({belongs_to: article_id})
+    .then(comments => {
+        res.status(200).send({comments});
+    });
+};
+
+module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId}
