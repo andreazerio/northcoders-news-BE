@@ -88,5 +88,14 @@ describe('api', () => {
                 expect(comments[0].created_by).to.equal('northcoder')
               });
           });
+         it('returns a 404 error if parameter is not a valid article id', () => {
+            return request(app)
+            .get('/api/articles/41224d776a326fb40f000001/comments')
+            .expect(404)
+            .then(res => {
+              const error = res.body.message;
+              expect(error).to.equal('article not found');
+            });
+         })
       });
 });

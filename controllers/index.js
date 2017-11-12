@@ -36,7 +36,11 @@ const getCommentsByArticleId = (req, res, next) => {
     const article_id = req.params.article_id;
     Comments.find({belongs_to: article_id})
     .then(comments => {
+        if (comments.length === 0) return next({status: 404, message: 'article not found'})
         res.status(200).send({comments});
+    })
+    .catch(err => {
+        if (err) next(err)
     });
 };
 
