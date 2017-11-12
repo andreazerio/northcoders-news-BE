@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const log4js = require('log4js');
 const logger = log4js.getLogger();
 const moment = require('moment');
-const DBs = require('../config').DB;
+const DBs = require('../config.js').DB;  
 
 mongoose.connect(DBs.dev, function (err) {
   if (!err) {

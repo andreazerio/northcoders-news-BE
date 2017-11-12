@@ -27,4 +27,16 @@ describe('api', () => {
             });
         });
       });
+      describe('GET /api/topics', () => {
+        it('returns an array of topics with a status code of 200', () => {
+          return request(app)
+            .get('/api/topics')
+            .expect(200)
+            .then(res => {
+              expect(res.body.topics).to.be.an('array');
+              expect(res.body.topics.length).to.equal(3);
+              expect(res.body.topics[0].slug).to.be.a('string');
+            });
+        });
+      });
 });
