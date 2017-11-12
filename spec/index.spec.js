@@ -107,4 +107,20 @@ describe('api', () => {
             });
          });
       });
+      describe('POST /api/articles/:article_id/comments', () => {
+          it('returns the comment poste by the user with a status code of 201', () => {
+            const article_id = updatedData.articles[0]._id;
+            const comment = 'This comment is to test the api';
+            return request(app)
+            .post(`/api/articles/${article_id}/comments`)
+            .send({
+                comment
+            })
+            .expect(201)
+            .then(res => {
+                const comment_test = res.body.comment.body;
+                expect(comment_test).to.equal(comment);
+            });
+          });
+      });
 });

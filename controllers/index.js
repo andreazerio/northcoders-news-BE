@@ -45,4 +45,20 @@ const getCommentsByArticleId = (req, res, next) => {
     });
 };
 
-module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId}
+const addComment = (req, res, next) => {
+const postBody = req.body.comment;
+const article_id = req.params.article_id;
+const {created_by = 'northcoder'} = req.body;
+const comment = new Comments({
+    body: postBody,
+    belongs_to: article_id,
+    created_by
+})
+.save()
+.then(comment => {
+    res.status(201).send({comment})
+})
+.catch(err => next(err));
+};
+
+module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment}
