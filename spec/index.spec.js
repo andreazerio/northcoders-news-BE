@@ -63,3 +63,16 @@ describe('api', () => {
           });
       });
 });
+describe('GET api/articles', () => {
+    it('returns an array of articles with a status code of 200', () => {
+        return request(app)
+        .get('/api/articles')
+        .expect(200)
+        .then(res => {
+          expect(res.body.articles).to.be.an('array');
+          expect(res.body.articles.length).to.equal(2);
+          expect(res.body.articles[1].title).to.equal('Football is fun')
+          expect(res.body.articles[0].belongs_to).to.be.a('string');
+        });
+    });
+});

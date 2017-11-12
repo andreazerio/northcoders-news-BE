@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const topics = require('./topicsRouter.js')
+const articles = require('./articlesRouter')
 
 
 router.route('/')
@@ -8,5 +9,6 @@ router.route('/')
 });
 
 router.use('/topics', topics);
+router.use('/articles', articles);
 
 module.exports = router;

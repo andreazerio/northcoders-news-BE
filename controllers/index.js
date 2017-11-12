@@ -22,4 +22,14 @@ const getArticlesByTopic = (req, res, next) => {
     });
 };
 
-module.exports = {getTopics, getArticlesByTopic}
+const getArticles = (req, res, next) => {
+    Articles.find()
+    .then(articles => {
+        res.status(200).send({articles})
+    })
+    .catch(err => {
+        if (err) next(err)
+    });
+};
+
+module.exports = {getTopics, getArticlesByTopic, getArticles}
