@@ -39,4 +39,17 @@ describe('api', () => {
             });
         });
       });
+      describe('GET api/topics/:topic_id/articles', () => {
+        it('returns an array of topics with a status code of 200', () => {
+          const topic = updatedData.topics[2].slug;
+          return request(app)
+            .get(`/api/topics/${topic}/articles`)
+            .expect(200)
+            .then(({body}) => {
+              const {articles} = body;
+              expect(articles).to.be.an('array');
+              expect(articles[0].belongs_to).to.equal(topic);
+            });
+        });
+      });
 });
