@@ -88,7 +88,7 @@ describe('api', () => {
                 expect(comments[0].created_by).to.equal('northcoder')
               });
           });
-         it('returns a 404 error if parameter is not a valid article id', () => {
+         it('returns a 404 error if parameter is a non existent id in the right format', () => {
             return request(app)
             .get('/api/articles/41224d776a326fb40f000001/comments')
             .expect(404)
@@ -96,6 +96,15 @@ describe('api', () => {
               const error = res.body.message;
               expect(error).to.equal('article not found');
             });
-         })
+         });
+         it('returns a 404 error if parameter is not a valid article id format', () => {
+            return request(app)
+            .get('/api/articles/andrea/comments')
+            .expect(404)
+            .then(res => {
+              const error = res.body.message;
+              expect(error).to.equal('article_id not valid');
+            });
+         });
       });
 });

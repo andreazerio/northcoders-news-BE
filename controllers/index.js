@@ -40,7 +40,8 @@ const getCommentsByArticleId = (req, res, next) => {
         res.status(200).send({comments});
     })
     .catch(err => {
-        if (err) next(err)
+        if (err.name === 'CastError')  next({status: 404, message: 'article_id not valid'})
+        next(err)
     });
 };
 
