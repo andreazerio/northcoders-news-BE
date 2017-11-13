@@ -94,6 +94,16 @@ const voteComment = (req, res, next) => {
         if (err.name === 'CastError') return next({status: 404, message: 'comment not found'});
         next(err);
     });
-}
+};
 
-module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle, voteComment}
+const deleteComment = (req, res, next) => {
+    const comment_id = req.params.comment_id;
+    Comments.findByIdAndRemove(comment_id)
+    .exec()
+    .then(comment => {
+        res.status(204).send();
+    })
+    .catch(err => next(err));
+};
+
+module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle, voteComment, deleteComment}

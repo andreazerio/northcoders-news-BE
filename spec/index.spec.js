@@ -221,4 +221,12 @@ describe('api', () => {
               });
           });
     });
+    describe('DELETE /api/comments/:comment_id', () => {
+        it('returns with a 204 status code', () => {
+            const comment_id = updatedData.comments[0]._id;
+            return request(app)
+              .delete(`/api/comments/${comment_id}`)
+              .expect(204);
+        });
+    });
 });
