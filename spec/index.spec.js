@@ -133,4 +133,17 @@ describe('api', () => {
             });
         });
     });
+    describe('PUT /api/articles/:article_id?vote=down', () => {
+        it('decreses the number of votes for the article selected and return a status code of 200', () => {
+            const article_id = updatedData.articles[0]._id;
+            const votes = updatedData.articles[0].votes;
+            return request(app)
+            .put(`/api/articles/${article_id}?vote=down`)
+            .expect(200)
+            .then(res => {
+            const newVotes = res.body.article.votes;
+            expect(newVotes).to.equal(votes - 1);
+            });
+        });
+    });
 });

@@ -60,4 +60,17 @@ const comment = new Comments({
 .catch(err => next(err));
 };
 
-module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment}
+const voteArticle = (req, res, next) => {
+    const article_id = req.params.article_id;
+    const query = req.query.vote;
+    let increment;
+
+    if(query === 'up') increment = 1;
+    else if(query === 'down') increment = -1;
+
+    Articles.findByIdAndUpdate(article_id, {$inc: {votes: increment}}, {new: true})
+    .then(article => res.send({article}))
+    .catch(err => next(err));
+}
+
+module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle}
