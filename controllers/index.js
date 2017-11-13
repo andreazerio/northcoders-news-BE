@@ -78,4 +78,22 @@ const voteArticle = (req, res, next) => {
     });
 };
 
-module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle}
+const voteComment = (req, res, next) => {
+    const comment_id = req.params.comment_id;
+    const query = req.query.vote;
+    let increment;
+
+    if(query === 'up') increment = 1;
+    else if(query === 'down') increment = -1;
+
+    Comments.findByIdAndUpdate(comment_id, {$inc: {votes: increment}}, {new: true})
+    .then(comment => {
+        res.send({comment})
+    })
+    .catch(err => {
+        if (err.name === 'CastError') return next({status: 404, message: 'comment not found'});
+        next(err);
+    });
+}
+
+module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle, voteComment}
