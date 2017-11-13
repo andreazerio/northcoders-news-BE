@@ -145,5 +145,14 @@ describe('api', () => {
             expect(newVotes).to.equal(votes - 1);
             });
         });
+        it('returns a 404 error if parameter is not a valid article id', () => {
+            return request(app)
+              .put('/api/articles/andrea?vote=down')
+              .expect(404)
+              .then((res) => {
+                  const error = res.body.message;
+                expect(error).to.equal('article not found');
+              });
+          });
     });
 });

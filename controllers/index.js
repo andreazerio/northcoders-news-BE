@@ -69,8 +69,13 @@ const voteArticle = (req, res, next) => {
     else if(query === 'down') increment = -1;
 
     Articles.findByIdAndUpdate(article_id, {$inc: {votes: increment}}, {new: true})
-    .then(article => res.send({article}))
-    .catch(err => next(err));
-}
+    .then(article => {
+        res.send({article})
+    })
+    .catch(err => {
+        if (err.name === 'CastError') return next({status: 404, message: 'article not found'});
+        next(err);
+    });
+};
 
 module.exports = {getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle}
