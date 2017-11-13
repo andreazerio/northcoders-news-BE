@@ -249,5 +249,14 @@ describe('api', () => {
               expect(user.username).to.equal(username);
             }); 
         });
+        it('returns a 404 error if parameter is not a valid comment id', () => {
+            return request(app)
+            .get(`/api/users/andrea`)
+                .expect(404)
+                .then((res) => {
+                    const error = res.body.message;
+                    expect(error).to.equal('Username does not match any user');
+                });
+        });
     });
 });
