@@ -238,4 +238,16 @@ describe('api', () => {
                 });
         });
     });
+    describe('GET /api/users/:username', () => {
+        it('returns only the correct user with a status code of 200', () => {
+            const username = updatedData.user.username;
+            return request(app)
+            .get(`/api/users/${username}`)
+            .expect(200)
+            .then(res => {
+                const user = res.body.user;
+              expect(user.username).to.equal(username);
+            }); 
+        });
+    });
 });

@@ -1,13 +1,11 @@
-const { Topics, Articles, Comments } = require('../models/models.js');
+const { Topics, Articles, Comments, Users} = require('../models/models.js');
 
 const getTopics = (req, res, next) => {
     Topics.find()
         .then(topics => {
             res.status(200).send({ topics });
         })
-        .catch(err => {
-            if (err) next(err)
-        });
+        .catch(err => next(err));
 };
 
 const getArticlesByTopic = (req, res, next) => {
@@ -17,9 +15,7 @@ const getArticlesByTopic = (req, res, next) => {
             if (articles.length === 0) return next({ status: 404, message: 'topic not found' })
             res.status(200).send({ articles })
         })
-        .catch(err => {
-            if (err) next(err);
-        });
+        .catch(err => next(err));
 };
 
 const getArticles = (req, res, next) => {
@@ -27,9 +23,7 @@ const getArticles = (req, res, next) => {
         .then(articles => {
             res.status(200).send({ articles })
         })
-        .catch(err => {
-            if (err) next(err)
-        });
+        .catch(err => next(err));
 };
 
 const getCommentsByArticleId = (req, res, next) => {
@@ -109,4 +103,13 @@ const deleteComment = (req, res, next) => {
         });
 };
 
-module.exports = { getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle, voteComment, deleteComment }
+const getUserByUsername = (req, res, next) => {
+    const user_name = req.params.username;
+    Users.findOne({username: user_name})
+    .then(user => {
+        res.status(200).send({user});
+    })
+    .catch(err => next(err))
+};
+
+module.exports = { getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle, voteComment, deleteComment, getUserByUsername }
