@@ -199,4 +199,26 @@ describe('api', () => {
               });
           });
     });
+    describe('PUT /api/comments/:comment_id?vote=up', () => {
+        it('decreses the number of votes for the comment selected and return a status code of 200', () => {
+            const comment_id = updatedData.comments[0]._id;
+            const votes = updatedData.comments[0].votes;
+            return request(app)
+            .put(`/api/comments/${comment_id}?vote=up`)
+            .expect(200)
+            .then(res => {
+            const newVotes = res.body.comment.votes;
+            expect(newVotes).to.equal(votes + 1);
+            });
+        });
+        it('returns a 404 error if parameter is not a valid comment id', () => {
+            return request(app)
+              .put('/api/comments/andrea?vote=up')
+              .expect(404)
+              .then((res) => {
+                  const error = res.body.message;
+                expect(error).to.equal('comment not found');
+              });
+          });
+    });
 });
