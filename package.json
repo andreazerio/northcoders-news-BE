@@ -5,7 +5,9 @@
   "main": "config.js",
   "scripts": {
     "test": "mocha ./spec/*",
-    "start": "PORT=3000 nodemon index.js"
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=dev nodemon index.js",
+    "seed:production" : "NODE_ENV=production node seed/seed.js"
   },
   "repository": {
     "type": "git",

@@ -11,9 +11,9 @@ const logger = log4js.getLogger();
 const moment = require('moment');
 const DBs = require('../config.js').DB;  
 
-mongoose.connect(DBs.dev, function (err) {
+mongoose.connect(DBs.production, function (err) {
   if (!err) {
-    logger.info(`connected to database ${DBs.dev}`);
+    logger.info(`connected to database ${DBs.production}`);
     mongoose.connection.db.dropDatabase();
     async.waterfall([
       addUsers,

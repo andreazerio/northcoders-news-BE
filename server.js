@@ -11,7 +11,7 @@ const apiRouter = require('./routers/api');
 mongoose.Promise = Promise;
 
 mongoose.connect(db, {useMongoClient: true})
-  .then(() => console.log('connected to database'))
+  .then(() => console.log('connected to database',db))
   .catch(err => console.log('connection failed', err));
 
 app.use(bodyParser.json());
