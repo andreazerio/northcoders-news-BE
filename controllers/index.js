@@ -26,6 +26,15 @@ const getArticles = (req, res, next) => {
         .catch(err => next(err));
 };
 
+const getArticleById = (req, res, next) => {
+    const article_id = req.params.article_id
+    Articles.find({_id: article_id})
+    .then(article => {
+        res.status(200).send({article})
+    })
+    .catch(err => next(err));
+};
+
 const getCommentsByArticleId = (req, res, next) => {
     const article_id = req.params.article_id;
     Comments.find({ belongs_to: article_id })
@@ -113,4 +122,4 @@ const getUserByUsername = (req, res, next) => {
     .catch(err => next(err))
 };
 
-module.exports = { getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle, voteComment, deleteComment, getUserByUsername }
+module.exports = { getTopics, getArticlesByTopic, getArticles, getCommentsByArticleId, addComment, voteArticle, voteComment, deleteComment, getUserByUsername, getArticleById }

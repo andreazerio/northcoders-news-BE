@@ -75,6 +75,18 @@ describe('api', () => {
                 });
         });
     });
+    describe('GET api/articles/:article_id', () => {
+        it('returns the correct article', () => {
+            const article_id = updatedData.articles[0]._id;
+            return request(app)
+              .get(`/api/articles/${article_id}`)
+              .expect(200)
+              .then( res => {
+                expect(res.body.article[0]).to.be.an('object');
+                expect(res.body.article[0].title).to.equal('Cats are great');
+              });
+        });
+    });
     describe('GET /api/articles/:article_id/comments', () => {
         it('returns an array of comments with a status code of 200', () => {
             const article_id = updatedData.articles[0]._id;
