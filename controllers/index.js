@@ -30,6 +30,7 @@ const getArticleById = (req, res, next) => {
     const article_id = req.params.article_id
     Articles.find({_id: article_id})
     .then(article => {
+        if (article.length === 0) return next({ status: 404, message: 'article not found' })
         res.status(200).send({article})
     })
     .catch(err => next(err));

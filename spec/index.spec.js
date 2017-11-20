@@ -86,6 +86,16 @@ describe('api', () => {
                 expect(res.body.article[0].title).to.equal('Cats are great');
               });
         });
+        it('returns a 404 error status code if parameter is not a valid article_id', () => {
+            const invalid_article_id = '41224d776a326fb40f000001'
+            return request(app)
+            .get(`/api/articles/${invalid_article_id}`)
+            .expect(404)
+            .then(res => {
+                const error = res.body.message;
+                expect(error).to.equal('article not found');
+            });
+        });
     });
     describe('GET /api/articles/:article_id/comments', () => {
         it('returns an array of comments with a status code of 200', () => {
