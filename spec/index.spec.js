@@ -138,6 +138,7 @@ describe('api', () => {
                 .send({ comment })
                 .expect(201)
                 .then(res => {
+                    console.log(res.body)
                     const comment_test = res.body.comment.body;
                     expect(comment_test).to.equal(comment);
                 });

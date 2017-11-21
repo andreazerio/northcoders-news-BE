@@ -55,8 +55,7 @@ const addComment = (req, res, next) => {
     if (/^\s*$/g.test(postBody)) return next({ status: 400, message: 'comment not valid - provide comment body' });
     const comment = new Comments({
         body: postBody,
-        belongs_to: article_id,
-        created_by: 'northcoder'
+        belongs_to: article_id
     });
         comment.save()
         .then(comment => {
