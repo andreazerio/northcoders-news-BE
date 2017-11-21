@@ -56,8 +56,8 @@ const addComment = (req, res, next) => {
     const comment = new Comments({
         body: postBody,
         belongs_to: article_id
-    })
-        .save()
+    });
+        comment.save()
         .then(comment => {
             res.status(201).send({ comment })
         })
