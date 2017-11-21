@@ -61,7 +61,10 @@ const addComment = (req, res, next) => {
         .then(comment => {
             res.status(201).send({ comment })
         })
-        .catch(err => next(err));
+        .catch(err => {
+            if(err.name === 'ValidationError')   next({status: 400, message: 'validation error - comment not valid'});
+            next(err)
+        });
 };
 
 const voteArticle = (req, res, next) => {
