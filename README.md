@@ -62,7 +62,7 @@ To test the api open a terminal window, navigate to the project directory and en
 
 Testing was carried out using Mocha, Chai and Supertest
 
-#API Endpoints
+# API Endpoints
 
 Please find below the routes available on this API:
 
@@ -109,7 +109,7 @@ Deletes a comment if the comment was created by the Northcoder user
 
 Returns a JSON object with the profile data for the specified user.
 
-#Built With
+# Built With
 
 1. Node.js
 2. Express.js
