@@ -94,12 +94,11 @@ e.g: {"comment": "This is my new comment"}
 7. PUT /api/articles/:article_id
 
 Increment or Decrement the votes of an article by one. This route requires a vote query of 'up' or 'down' 
-e.g: http://northcoders-news-api.herokuapp.com/api/articles/:article_id?vote=up
+
 
 8. PUT /api/comments/:comment_id
 
 Increment or Decrement the votes of a comment by one. This route requires a vote query of 'up' or 'down' 
-e.g: http://northcoders-news-api.herokuapp.com/api/comments/:comment_id?vote=down
 
 9. DELETE /api/comments/:comment_id
 
