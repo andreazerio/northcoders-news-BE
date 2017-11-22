@@ -17,12 +17,9 @@ mongoose.connect(db, {useMongoClient: true})
 app.use(bodyParser.json());
 app.use('/api', apiRouter);
 
-app.use(function(err, req, res, next) {
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  if (err.status === 404) res.status(404).send({message: err.message});
-  if (err.status === 400) res.status(400).send({message: err.message});
-    next(err);
   next();
 });
 app.use('/*', (req, res) => {
