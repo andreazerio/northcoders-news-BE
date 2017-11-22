@@ -54,7 +54,7 @@ Finally to run the server enter the following command in your terminal window:
 
 This will run the server on port 5000. All endpoints can be found locally on http://localhost:5000 .
 
-#Testing
+# Testing
 
 To test the api open a terminal window, navigate to the project directory and enter the following command
 
