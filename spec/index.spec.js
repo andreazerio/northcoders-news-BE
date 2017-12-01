@@ -34,7 +34,7 @@ describe('api', () => {
                 .expect(200)
                 .then(res => {
                     expect(res.body.topics).to.be.an('array');
-                    expect(res.body.topics.length).to.equal(3);
+                    expect(res.body.topics.length).to.equal(updatedData.topics.length);
                     expect(res.body.topics[0].slug).to.be.a('string');
                 });
         });
@@ -49,7 +49,7 @@ describe('api', () => {
                     const articles = res.body.articles;
                     expect(articles).to.be.an('array');
                     expect(articles[0].belongs_to).to.equal(topic);
-                    expect(articles[0].title).to.equal('Cats are great')
+                    expect(articles[0].title).to.equal(updatedData.articles[0].title)
                 });
         });
         it('returns a 404 error status code if parameter is not a valid topic', () => {
@@ -69,8 +69,8 @@ describe('api', () => {
                 .expect(200)
                 .then(res => {
                     expect(res.body.articles).to.be.an('array');
-                    expect(res.body.articles.length).to.equal(2);
-                    expect(res.body.articles[1].title).to.equal('Football is fun')
+                    expect(res.body.articles.length).to.equal(updatedData.articles.length);
+                    expect(res.body.articles[1].title).to.equal(updatedData.articles[1].title)
                     expect(res.body.articles[0].belongs_to).to.be.a('string');
                 });
         });
@@ -83,7 +83,7 @@ describe('api', () => {
               .expect(200)
               .then( res => {
                 expect(res.body.article[0]).to.be.an('object');
-                expect(res.body.article[0].title).to.equal('Cats are great');
+                expect(res.body.article[0].title).to.equal(updatedData.articles[0].title);
               });
         });
         it('returns a 404 error status code if parameter is not a valid article_id', () => {
@@ -107,7 +107,7 @@ describe('api', () => {
                     const comments = res.body.comments;
                     expect(comments).to.be.an('array');
                     expect(comments[0].belongs_to).to.equal(article_id.toString());
-                    expect(comments[0].created_by).to.equal('northcoder')
+                    expect(comments[0].created_by).to.equal(updatedData.comments[0].created_by)
                 });
         });
         it('returns a 404 error if parameter is a non existent id in the right format', () => {
