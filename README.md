@@ -40,7 +40,7 @@ Navigate inside the folder and install all dependencies by entering the followin
 
 ```npm install```
 
-Open a new terminal window, navigate inside the project folder and enter the following command to connect to the database and keep it running: 
+ Enter the following command in your terminal window to connect to the database and keep it running: 
 
 ```mongod```
 

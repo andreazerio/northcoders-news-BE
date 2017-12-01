@@ -1,4 +1,4 @@
-const {Comments} = require('../models/models.js');
+const {Comments} = require('../models');
 
 const voteComment = (req, res, next) => {
     const comment_id = req.params.comment_id;

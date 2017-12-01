@@ -1,4 +1,4 @@
-const {Articles,Comments} = require('../models/models.js');
+const {Articles,Comments} = require('../models');
 
 const getArticles = (req, res, next) => {
     Articles.find()
