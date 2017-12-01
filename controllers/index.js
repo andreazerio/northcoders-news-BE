@@ -15,7 +15,10 @@ const getArticlesByTopic = (req, res, next) => {
             if (articles.length === 0) return next({ status: 404, message: 'topic not found' })
             res.status(200).send({ articles })
         })
-        .catch(err => next(err));
+        .catch(err => {
+            if (err.name === 'CastError') next({ status: 404, message: 'topic not found' });
+            next(err)
+        });
 };
 
 const getArticles = (req, res, next) => {
@@ -33,7 +36,11 @@ const getArticleById = (req, res, next) => {
         if (article.length === 0) return next({ status: 404, message: 'article not found' })
         res.status(200).send({article})
     })
-    .catch(err => next(err));
+    .catch(err => {
+        if (err.name === 'CastError') next({ status: 404, message: 'article not found' });
+        next(err)
+    
+    });
 };
 
 const getCommentsByArticleId = (req, res, next) => {
