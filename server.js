@@ -28,4 +28,8 @@ app.use((err, req, res, next) => {
 app.use('/*', (req, res) => {
   res.status(404).send({message: 'Page not found'});
 });
+
+app.use((err, req, res) => {
+  res.status(500).send({err});
+});
 module.exports = app
