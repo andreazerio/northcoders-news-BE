@@ -2,14 +2,14 @@ const router = require('express').Router();
 const {getArticles, getCommentsByArticleId, addComment, voteArticle, getArticleById} = require('../controllers/articlesController');
 
 router.route('/')
-.get(getArticles);
+  .get(getArticles);
 
 router.route('/:article_id/comments')
-.get(getCommentsByArticleId)
-.post(addComment);
+  .get(getCommentsByArticleId)
+  .post(addComment);
 
 router.route('/:article_id')
-.get(getArticleById)
-.put(voteArticle);
+  .get(getArticleById)
+  .put(voteArticle);
 
 module.exports = router;

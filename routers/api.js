@@ -5,9 +5,9 @@ const comments = require('./commentsRouter');
 const users = require('./usersRouter');
 
 router.route('/')
-.get((req,res) => {
-  res.status(200).send({status: 'root path working'});
-});
+  .get((req,res) => {
+    res.status(200).send({status: 'root path working'});
+  });
 
 router.use('/topics', topics);
 router.use('/articles', articles);

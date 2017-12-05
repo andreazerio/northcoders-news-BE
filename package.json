@@ -7,7 +7,10 @@
     "test": "mocha ./spec/*",
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=dev nodemon index.js",
-    "seed:production": "NODE_ENV=production node seed/seed.js"
+    "seed:production": "NODE_ENV=production node seed/seed.js",
+    "pretest": "npm run lint",
+    "lint": "eslint ./",
+    "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",

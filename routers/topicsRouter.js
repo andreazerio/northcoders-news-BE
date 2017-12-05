@@ -2,9 +2,9 @@ const router = require('express').Router();
 const {getTopics, getArticlesByTopic} = require('../controllers/topicsController');
 
 router.route('/')
-.get(getTopics);
+  .get(getTopics);
 
 router.route('/:topic_id/articles')
-.get(getArticlesByTopic);
+  .get(getArticlesByTopic);
 
 module.exports = router;
