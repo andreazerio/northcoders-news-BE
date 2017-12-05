@@ -17,7 +17,7 @@ const getArticlesByTopic = (req, res, next) => {
       res.status(200).send({ articles });
     })
     .catch(err => {
-      if (err.name === 'CastError') next({ status: 404, message: 'topic not found' });
+      if (err.name === 'CastError') next({ status: 400, message: 'topic not found' });
       next(err);
     });
 };

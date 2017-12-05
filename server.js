@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const config = require('./config');
 const db = config.DB[process.env.NODE_ENV] || process.env.DB;
-const apiRouter = require('./routers/api');
+const apiRouter = require('./routers');
 const cors = require('cors');
 
 mongoose.Promise = Promise;

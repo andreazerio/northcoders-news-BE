@@ -6,7 +6,7 @@ To view the API endpoints described below, please follow the instructions in [th
 
 # SetUp
 
-You will need Node.js npm, git and MongoDB installed before being able to run this project.
+You will need Node.js v7.9.0 or later npm, git and MongoDB v3.2 or later installed before being able to run this project.
 
 To check if Node.js is installed on your machine open a terminal window and enter:
 
